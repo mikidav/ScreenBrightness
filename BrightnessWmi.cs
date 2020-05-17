@@ -55,7 +55,7 @@ namespace ScreenBrightness
                 GettingCurrentValue();
 
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 IsSupported = false;
 

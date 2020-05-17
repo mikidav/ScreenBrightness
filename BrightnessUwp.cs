@@ -29,7 +29,7 @@ namespace ScreenBrightness
                 brightnessOverride.BrightnessLevelChanged += brightnessLevelChangedHandler;
 
             }
-            catch (System.Exception)
+            catch (System.Exception exc)
             {
                 IsSupported = false;
 

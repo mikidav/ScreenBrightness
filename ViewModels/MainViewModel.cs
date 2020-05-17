@@ -19,23 +19,30 @@ namespace ScreenBrightness.ViewModels
         public void Initialize()
         {
             BrightnessDxva2Invoke.Initialize();
+            m_brightnessLevelDxva2 = BrightnessDxva2Invoke.CurrentBrightness;
             NotifyOfPropertyChange(() => MaxBrightnessLevelDxva2);
             NotifyOfPropertyChange(() => MinBrightnessLevelDxva2);
             NotifyOfPropertyChange(() => BrightnessLevelDxva2);
+            NotifyOfPropertyChange(() => IsSupportedsDxva2Invoke);
+
 
             BrightnessUwp.Initialize();
             NotifyOfPropertyChange(() => MaxBrightnessLevelUwp);
             NotifyOfPropertyChange(() => MinBrightnessLevelUwp);
             NotifyOfPropertyChange(() => BrightnessLevelUwp);
+            NotifyOfPropertyChange(() => IsSupportedUwp);
 
             BrightnessWmi.Initialize();
             m_brightnessLevelWmi = BrightnessWmi.CurrentBrightness;
             NotifyOfPropertyChange(() => MaxBrightnessLevelWmi);
             NotifyOfPropertyChange(() => MinBrightnessLevelWmi);
             NotifyOfPropertyChange(() => BrightnessLevelWmi);
+            NotifyOfPropertyChange(() => IsSupportedWmi);
         }
 
         private uint m_brightnessLevelWmi;
+        private uint m_brightnessLevelDxva2;
+
         public uint BrightnessLevelWmi
         {
             get { return m_brightnessLevelWmi; }
@@ -65,13 +72,21 @@ namespace ScreenBrightness.ViewModels
                 return BrightnessWmi.IsSupported;
             }
         }
-               
+
 
         public void OnSliderMouseUpWmi(Slider slider)
         {
 
         }
-   
+        public void OnSliderMouseUpDXva2(Slider slider)
+        {
+
+        }
+        public void OnSliderMouseUpUwp(Slider slider)
+        {
+
+        }
+
 
         public uint BrightnessLevelUwp
         {
@@ -104,9 +119,10 @@ namespace ScreenBrightness.ViewModels
 
         public uint BrightnessLevelDxva2
         {
-            get { return BrightnessDxva2Invoke.CurrentBrightness; }
+            get { return m_brightnessLevelDxva2; }
             set
             {
+                m_brightnessLevelDxva2 = value;
                 BrightnessDxva2Invoke.ApplyBrightness(value);
                 NotifyOfPropertyChange(() => BrightnessLevelDxva2);
             }

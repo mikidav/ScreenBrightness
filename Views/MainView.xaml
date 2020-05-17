@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:cal="http://www.caliburnproject.org"
-        xmlns:styles="clr-namespace:ScreenBrightness.Styles" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:styles="clr-namespace:ScreenBrightness.Styles"
         mc:Ignorable="d"        
         Title="{Binding WindowTitle}"
-        Height="300" Width="300" >
+        Height="395" Width="529" >
     <StackPanel>
         <Label Content="Wmi"></Label>
 
@@ -28,7 +28,6 @@
                         </cal:ActionMessage>
                     </styles:RoutedEventTrigger>
                 </i:Interaction.Triggers>
-
             </Slider>
         </StackPanel>
 
@@ -38,7 +37,18 @@
             <TextBlock x:Name="BrightnessLevelDxva2"></TextBlock>
             <TextBlock x:Name="MinBrightnessLevelDxva2"></TextBlock>
             <CheckBox x:Name="IsSupportedDxva2"></CheckBox>
-            <Slider Value="{Binding BrightnessLevelDxva2}" Maximum="{Binding MaxBrightnessLevelDxva2}" Minimum="{Binding MinBrightnessLevelDxva2}"></Slider>
+            <Slider x:Name="DXva2Slider" 
+                    Value="{Binding BrightnessLevelDxva2}"
+                    Maximum="{Binding MaxBrightnessLevelDXva2}" 
+                    Minimum="{Binding MinBrightnessLevelDXva2}">
+                <i:Interaction.Triggers>
+                    <styles:RoutedEventTrigger RoutedEvent="Thumb.DragCompleted">
+                        <cal:ActionMessage MethodName="OnSliderMouseUpDXva2">
+                            <cal:Parameter Value="$source" />
+                        </cal:ActionMessage>
+                    </styles:RoutedEventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
         </StackPanel>
         <Label Content="Uwp"></Label>
 
@@ -49,9 +59,17 @@
             <CheckBox x:Name="IsSupportedUwp">
 
             </CheckBox>
-            <Slider Value="{Binding BrightnessLevelUwp}" 
-                    Maximum="{Binding MaxBrightnessLevelUwp}"
-                    Minimum="{Binding MinBrightnessLevelUwp}" >
+            <Slider x:Name="UwpSlider" 
+                    Value="{Binding BrightnessLevelUwp}"
+                    Maximum="{Binding MaxBrightnessLevelUwp}" 
+                    Minimum="{Binding MinBrightnessLevelUwp}">
+                <i:Interaction.Triggers>
+                    <styles:RoutedEventTrigger RoutedEvent="Thumb.DragCompleted">
+                        <cal:ActionMessage MethodName="OnSliderMouseUpUwp">
+                            <cal:Parameter Value="$source" />
+                        </cal:ActionMessage>
+                    </styles:RoutedEventTrigger>
+                </i:Interaction.Triggers>
             </Slider>
         </StackPanel>
     </StackPanel>

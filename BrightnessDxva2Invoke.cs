@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-public class BrightnessDxva2Invoke :  IBrightnessDxva2Invoke
+public class BrightnessDxva2Invoke : IBrightnessDxva2Invoke
 {
     private IntPtr m_hmonitor;
     private int monitorNum;
@@ -40,7 +40,7 @@ public class BrightnessDxva2Invoke :  IBrightnessDxva2Invoke
             IsSupported = success;
 
         }
-        catch (System.Exception)
+        catch (System.Exception ex)
         {
             IsSupported = false;
 
@@ -58,9 +58,9 @@ public class BrightnessDxva2Invoke :  IBrightnessDxva2Invoke
         {
             level = MaxBrightness;
         }
-
+        bool res;
         if (IsSupported)
-            NativeMethods.SetMonitorBrightness(m_hmonitor, level);
+            res = NativeMethods.SetMonitorBrightness(m_hmonitor, level);
 
     }
 
